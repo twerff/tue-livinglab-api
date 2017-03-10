@@ -57,6 +57,22 @@ void setDimLevel(int lampID, int value, int time)
   println("setDimLevel of lamp " + lampID + " to " + value + " in " + time + " ms" );
 }
 
+void setBrightness(int lampID, int value)
+{
+  int dim = (int) map(value,0,255,0,MAXDIMLEVEL);
+  dim = constrain(dim,0,MAXDIMLEVEL);
+  sendMessage("setDimLevel", lampID, dim);
+  println("setBrightness of lamp " + lampID + " to " + value);
+}
+
+void setBrightness(int lampID, int value, int time)
+{
+  int dim = (int) map(value,0,255,0,MAXDIMLEVEL);
+  dim = constrain(dim,0,MAXDIMLEVEL);
+  sendMessage("setDimLevel", lampID, dim, time);
+  println("setBrightness of lamp " + lampID + " to " + value + " in " + time + " ms" );
+}
+
 void setCT(int lampID, int value)
 {
   sendMessage("setCT", lampID, value);

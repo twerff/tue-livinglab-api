@@ -9,14 +9,14 @@
 /* 
   The following functions are available in this version:
   
-  setDimLevel(0,MAXDIMLEVEL);            //set the dimLevel of a lamp                                    (int lampID, int dimLevel [0-65535])
-  setDimLevel(0,MINDIMLEVEL,100);        //set the dimLevel of a lamp with a fadeTime in milliseconds    (int lampID, int dimLevel, int fadeTime [0-...])
-  setCT(0,MAXCT);                        //set the color temperature in Kelvin                           (int lampID, int ct [1700-8000])
-  setCT(0,MINCT,100);                    //set the ct of a lamp with a fadeTime in milliseconds          (int lampID, int ct, int fadeTime [0-...])
-  setRGB(0,255,0,0);                     //set the color of a lamp in RGB                                (int lampID, int red, int green, int blue [0-255])
-  setRGB(0,255,0,0,100);                 //set the color of a lamp with a fadeTime in milliseconds       (int lampID, int red, int green, int blue, int fadeTime [0-...])
-  setOn(0,true);                         //turn a lamp on or off                                         (int lampID, bool onState [true/false])
-  setOn(0,1);                            //turn a lamp on or off                                         (int lampID, int onState [0-1])
+  setBrightness(0,255);            //set the brightness of a lamp                                  (int lampID, int brightness [0-255])
+  setBrightness(0,255,100);        //set the brightness of a lamp with a fadeTime in milliseconds  (int lampID, int brightness, int fadeTime [0-...])
+  setCT(0,MAXCT);                  //set the color temperature in Kelvin                           (int lampID, int ct [1700-8000])
+  setCT(0,MINCT,100);              //set the ct of a lamp with a fadeTime in milliseconds          (int lampID, int ct, int fadeTime [0-...])
+  setRGB(0,255,0,0);               //set the color of a lamp in RGB                                (int lampID, int red, int green, int blue [0-255])
+  setRGB(0,255,0,0,100);           //set the color of a lamp with a fadeTime in milliseconds       (int lampID, int red, int green, int blue, int fadeTime [0-...])
+  setOn(0,true);                   //turn a lamp on or off                                         (int lampID, bool onState [true/false])
+  setOn(0,1);                      //turn a lamp on or off                                         (int lampID, int onState [0-1])
 */
 
 
