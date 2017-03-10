@@ -4,7 +4,7 @@ Processing sketch for communication with the lighting system in the TU/e Office 
 new in v1.0.3
 - added setBrightness functionality (0-255)
 - added Philips Hue and iColor Cove functionality
-  No longer use the lampID directly in the function, instead first create a lamp instance to call a function: 
+- No longer use the lampID directly in the function, instead first create a lamp instance to call a function: 
   "setBrightness(lampID, value)" is now "getPB(lampID).setBrightness(value)"
 
 new in v1.0.2
