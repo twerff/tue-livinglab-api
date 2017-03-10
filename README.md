@@ -11,3 +11,5 @@ Future work:
 - add support for Philips Hue lights
 - add support for Philips Color Kinetics iColor Coves
 - add notifications for presence sensing
+
+For questions, email me!
