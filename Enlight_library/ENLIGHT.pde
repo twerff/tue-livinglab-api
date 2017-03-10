@@ -1,8 +1,8 @@
 import oscP5.*;
 import netP5.*;
 
-public final int MINCT = 2700;                               //lowest  colortemperature available for ENLIGHT
-public final int MAXCT = 9000;                               //highest colortemperature available for ENLIGHT
+public final int MINCT = 2200;                               //lowest  colortemperature available
+public final int MAXCT = 9000;                               //highest colortemperature available
 final static int MINDIMLEVEL = 0;                            //lowest  dimLevel available for ENLIGHT
 final static int MAXDIMLEVEL = 65535;                        //highest dimLevel available for ENLIGHT
 final static int MINBRIGHTNESS = 0;                          //lowest  brightness available for ENLIGHT
@@ -33,68 +33,86 @@ void connect()
   oscP5.send(message, serverAddress);
 }
 
-void setOn(int lampID, boolean value)
+public static final int PB = 0;
+public static final int HUE = 100;
+public static final int COVE = 200;
+
+public Lamp getHue(int id)
 {
-  int i = 0;
-  if (value) i = 1;
-  setOn(lampID, i);
+  return new Lamp(HUE+id);
 }
 
-void setOn(int lampID, int value)
+public Lamp getPB(int id)
 {
-  sendMessage("setOn", lampID, value);
+  return new Lamp(PB+id);
 }
 
-void setDimLevel(int lampID, int value)
+public Lamp getCove(int id)
 {
-  sendMessage("setDimLevel", lampID, value);
-  println("setDimLevel of lamp " + lampID + " to " + value);
+  return new Lamp(COVE+id);
 }
 
-void setDimLevel(int lampID, int value, int time)
-{
-  sendMessage("setDimLevel", lampID, value, time);
-  println("setDimLevel of lamp " + lampID + " to " + value + " in " + time + " ms" );
-}
 
-void setBrightness(int lampID, int value)
+class Lamp
 {
-  int dim = (int) map(value,0,255,0,MAXDIMLEVEL);
-  dim = constrain(dim,0,MAXDIMLEVEL);
-  sendMessage("setDimLevel", lampID, dim);
-  println("setBrightness of lamp " + lampID + " to " + value);
-}
+  int lampID;
+  
+  public Lamp(int id)
+  {
+    lampID = id;
+  }
 
-void setBrightness(int lampID, int value, int time)
-{
-  int dim = (int) map(value,0,255,0,MAXDIMLEVEL);
-  dim = constrain(dim,0,MAXDIMLEVEL);
-  sendMessage("setDimLevel", lampID, dim, time);
-  println("setBrightness of lamp " + lampID + " to " + value + " in " + time + " ms" );
-}
+  void setOn(boolean value)
+  {
+    int i = 0;
+    if (value) i = 1;
+    setOn(i);
+  }
 
-void setCT(int lampID, int value)
-{
-  sendMessage("setCT", lampID, value);
-  println("setCT of lamp " + lampID + " to " + value);
-}
+  void setOn(int value)
+  {
+    sendMessage("setOn", lampID, value);
+  }
 
-void setCT(int lampID, int value, int time)
-{
-  sendMessage("setCT", lampID, value, time);
-  println("setCT of lamp " + lampID + " to " + value);
-}
+  void setBrightness(int value)
+  {
+    int dim = (int) map(value, 0, 255, 0, MAXDIMLEVEL);
+    dim = constrain(dim, 0, MAXDIMLEVEL);
+    sendMessage("setDimLevel", lampID, dim);
+    println("setBrightness of lamp " + lampID + " to " + value);
+  }
 
-void setRGB(int lampID, int r, int g, int b)
-{
-  sendMessage("setRGB", lampID, r, g, b);
-  println("setRGB of lamp " + lampID + " to " + r + "," + g + "," + b);
-}
+  void setBrightness(int value, int time)
+  {
+    int dim = (int) map(value, 0, 255, 0, MAXDIMLEVEL);
+    dim = constrain(dim, 0, MAXDIMLEVEL);
+    sendMessage("setDimLevel", lampID, dim, time);
+    println("setBrightness of lamp " + lampID + " to " + value + " in " + time + " ms" );
+  }
 
-void setRGB(int lampID, int r, int g, int b, int time)
-{
-  sendMessage("setRGB", lampID, r, g, b, time);
-  println("setRGB of lamp " + lampID + " to " + r + "," + g + "," + b);
+  void setCT(int value)
+  {
+    sendMessage("setCT", lampID, value);
+    println("setCT of lamp " + lampID + " to " + value);
+  }
+
+  void setCT(int value, int time)
+  {
+    sendMessage("setCT", lampID, value, time);
+    println("setCT of lamp " + lampID + " to " + value);
+  }
+
+  void setRGB(int r, int g, int b)
+  {
+    sendMessage("setRGB", lampID, r, g, b);
+    println("setRGB of lamp " + lampID + " to " + r + "," + g + "," + b);
+  }
+
+  void setRGB(int r, int g, int b, int time)
+  {
+    sendMessage("setRGB", lampID, r, g, b, time);
+    println("setRGB of lamp " + lampID + " to " + r + "," + g + "," + b);
+  }
 }
 
 void sendMessage(String function, int lampID, int... value)
@@ -104,7 +122,7 @@ void sendMessage(String function, int lampID, int... value)
   message.add(value.length);
   for (int v:value) message.add(v);
   oscP5.send(message, serverAddress);
-  delay(10);
+  //delay(10);
 }
 
 void oscEvent(OscMessage message)
@@ -120,10 +138,18 @@ void oscEvent(OscMessage message)
       _luminaires.add(l);
     }
   }
-  //else if()
+  else
+  {
+    println("message received: " + message);
+  }
 }
 
-////IN PROGRESS
+
+
+
+
+///under development
+
 XML getLuminaires()
 {
   XML xml = parseXML("<luminaires></luminaires>");
@@ -231,7 +257,7 @@ class Luminaire
 }
 
 
-///under development
+
 /*
 void setName(int lampID, String value)
 {

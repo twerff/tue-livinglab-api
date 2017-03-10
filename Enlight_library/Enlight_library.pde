@@ -9,14 +9,18 @@
 /* 
   The following functions are available in this version:
   
-  setBrightness(0,255);            //set the brightness of a lamp                                  (int lampID, int brightness [0-255])
-  setBrightness(0,255,100);        //set the brightness of a lamp with a fadeTime in milliseconds  (int lampID, int brightness, int fadeTime [0-...])
-  setCT(0,MAXCT);                  //set the color temperature in Kelvin                           (int lampID, int ct [1700-8000])
-  setCT(0,MINCT,100);              //set the ct of a lamp with a fadeTime in milliseconds          (int lampID, int ct, int fadeTime [0-...])
-  setRGB(0,255,0,0);               //set the color of a lamp in RGB                                (int lampID, int red, int green, int blue [0-255])
-  setRGB(0,255,0,0,100);           //set the color of a lamp with a fadeTime in milliseconds       (int lampID, int red, int green, int blue, int fadeTime [0-...])
-  setOn(0,true);                   //turn a lamp on or off                                         (int lampID, bool onState [true/false])
-  setOn(0,1);                      //turn a lamp on or off                                         (int lampID, int onState [0-1])
+  getPB(0)                       //get the PowerBalance with id 0
+  getHue(0)                      //get the Hue lamp with id 0
+  getCove(0)                     //get the iColor Cove with id 0
+  
+  getPB(0).setBrightness(255);   //set the brightness of PowerBalance 0 to 255              (int brightness [0-255])
+    setBrightness(255,100);      //set the brightness with a fadeTime in milliseconds       (int brightness, int fadeTime [0-...])
+    setCT(MAXCT);                //set the color temperature in Kelvin                      (int ct [1700-8000])
+    setCT(MINCT,100);            //set the ct of a lamp with a fadeTime in milliseconds     (int ct, int fadeTime [0-...])
+    setRGB(255,0,0);             //set the color of a lamp in RGB                           (int red, int green, int blue [0-255])
+    setRGB(255,0,0,100);         //set the color of a lamp with a fadeTime in milliseconds  (int red, int green, int blue, int fadeTime [0-...])
+    setOn(true);                 //turn a lamp on or off                                    (boolean onState [true/false])
+    setOn(1);                    //turn a lamp on or off                                    (int onState [0-1])
 */
 
 
@@ -67,10 +71,10 @@ void mousePressed()
 void mouseReleased()
 {
   int ct = (int) map(mouseX,0,width,MINCT,MAXCT);
-  int dimLevel = (int) map(mouseY,height,0,0,MAXDIMLEVEL);
+  int brightness = (int) map(mouseY,height,0,MINBRIGHTNESS,MAXBRIGHTNESS);
 
   int longPress = int(millis() - pressTime);
   int lampID = 0;
-  setDimLevel(lampID,dimLevel, longPress);
-  setCT(lampID, ct, longPress); 
+  getPB(lampID).setBrightness(brightness, longPress);
+  getPB(lampID).setCT(ct, longPress);
 }
