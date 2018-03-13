@@ -27,9 +27,9 @@
 void setup()
 {
   //this function initiates the Enlight communcation. Make sure to fill in the correct IP address and PORT!
-  //in the lightlab use IP 192.168.1.63 and PORT 11000
+  //in the lightlab use IP 192.168.1.36 and PORT 11000
   //in the office lab use IP 192.168.1.102 and PORT 12000
-  setupEnlight("192.168.1.63", 11000); 
+  setupEnlight("192.168.1.36", 11000); 
   
   size(640,480);  
   drawGrid();
